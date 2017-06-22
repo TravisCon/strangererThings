@@ -1,0 +1,15 @@
+{
+  "name": "Inclass_Book_Demo",
+  "version": "1.0.0",
+  "engine": {
+    "node": "6.10.2"
+  },
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "express": "^4.15.3"
+  }
+}
