@@ -8,15 +8,11 @@ CREATE TABLE setting
   notes      TEXT
 );
 
-\d setting;
-
 CREATE TABLE choice_group
 (
   id          SERIAL PRIMARY KEY,
   setting_id   INT NOT NULL REFERENCES setting(id)
 );
-
-\d choice_group;
 
 CREATE TABLE result
 (
@@ -25,8 +21,6 @@ CREATE TABLE result
   description       TEXT
 );
 
-\d result;
-
 CREATE TABLE choice
 (
   id          SERIAL PRIMARY KEY,
@@ -34,8 +28,6 @@ CREATE TABLE choice
   result_id   INT NOT NULL REFERENCES result(id),
   description TEXT
 );
-
-\d choice;
 
 INSERT INTO setting(photo_url, notes)
 VALUES
