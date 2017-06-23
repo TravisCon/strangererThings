@@ -17,10 +17,6 @@ function getBook(id) {
 
 }
 
-function createBook(title) {
-
-}
-
 module.exports = {
 	getAllBooks: getAllBooks,
 	getBook: getBook,

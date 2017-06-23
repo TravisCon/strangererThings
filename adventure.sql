@@ -4,6 +4,7 @@ CREATE SCHEMA public;
 CREATE TABLE setting
 (
   id         SERIAL PRIMARY KEY,
+  name       VARCHAR(128) NOT NULL,
   photo_url  VARCHAR(512) NOT NULL,
   notes      TEXT
 );
@@ -11,7 +12,8 @@ CREATE TABLE setting
 CREATE TABLE choice_group
 (
   id          SERIAL PRIMARY KEY,
-  setting_id   INT NOT NULL REFERENCES setting(id)
+  setting_id  INT NOT NULL REFERENCES setting(id),
+  name        VARCHAR(128)
 );
 
 CREATE TABLE result
@@ -29,8 +31,14 @@ CREATE TABLE choice
   description TEXT
 );
 
-INSERT INTO setting(photo_url, notes)
+INSERT INTO setting(name, photo_url, notes)
 VALUES
-('test.jpg', 'This is a test setting');
+('lake', 'lake1.jpg', 'Beginning spot'),
+('dock', 'dock1.jpg', 'When the user chooses to swim'),
+('underwater', 'underwater_cave.jpg', "User opens chest with scuba gear");
+
+INSERT INTO choice_group(setting_id, name)
+VALUES
+((SELECT id FROM setting WHERE name = 'lake'), 'begin');
 
 #cat .\recipes.sql | heroku pg:psql
