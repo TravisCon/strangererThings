@@ -46,17 +46,24 @@ VALUES
 INSERT INTO consequence(trigger_group_id, description)
 VALUES
 ((SELECT id FROM choice_group WHERE name = 'dead'),
-'You have died! Sorry'),
+ 'You have died! Sorry'),
 ((SELECT id FROM choice_group WHERE name = 'dead'),
-'You have still died! Sorry'),
+ 'You have still died! Sorry'),
 ((SELECT id FROM choice_group WHERE name = 'dead'),
-'Once again, you died');
+ 'Once again, you died');
 
 INSERT INTO choice(group_id, consequence_id, description)
 VALUES
 ((SELECT id FROM choice_group WHERE name='begin'), 1, 'Swim to shore'),
 ((SELECT id FROM choice_group WHERE name='begin'), 2, 'Swim to treasure chest'),
 ((SELECT id FROM choice_group WHERE name='begin'), 3, 'Swim to pirate ship');
+
+SELECT c1.description, c2.description, c2.consequence_id FROM consequence c1 
+  JOIN choice_group cg  ON cg.id = c1.trigger_group_id
+  JOIN choice c2        ON cg.id = c2.group_id
+  #JOIN setting s        ON s.id = cg.setting_id
+  #WHERE c1.id = (SELECT consequence_id FROM choice WHERE #description = 'Swim to treasure chest');
+  #s.photo_url,
 
 #DROP SCHEMA public CASCADE;
 #CREATE SCHEMA public;

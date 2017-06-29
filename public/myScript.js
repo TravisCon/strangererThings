@@ -1,10 +1,9 @@
 $(document).ready(function(){
-  $("#begin").click(function(){
-    var id = encodeURIComponent(2);
-    var params = {choice_id: id};
+  $("button").click(function(){
+    var buttonName = encodeURIComponent($(this).val());
+    var params = {description: buttonName};
     var myURL = "/lake";
-//    console.log(myURL);
-//    console.log(id);
+    //    console.log(myURL);
     $.get(myURL, params, display);
   });
 });
@@ -12,16 +11,17 @@ $(document).ready(function(){
 function display(data, status){
   if (status != "success"){
     $("result").html("Error with search");
-    return 1; 
+    return 1;
+  } else {
+    console.log("Data: " + data + ". Status: " + status);
+    var output = "";
+    console.log(data[0].description);
+    for (i in data){
+      newButtons += data[i].description + "<br>"; 
+    }
+    
+    console.log(consequence);
+    $("#choices").html(newButtons);
+    $("#results").html();
   }
-  console.log("Data: " + data + ". Status: " + status);
-  var results = data.choices;
-  var output = "";
-  console.log(results[0].name);
-  for (i in results){
-    output += results[i].name + "<br>"; 
-  }
-
-  console.log(output);
-  $("#results").html(output);
 }

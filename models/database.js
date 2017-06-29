@@ -1,29 +1,23 @@
 var pg = require('pg');
 pg.defaults.ssl = true;
 
-pgConn = 'postgres://iitxlielolcqnu:f4acb49cfb5293787b0ca3f79e4f5622114ec8ccdc0d9a2927af6c60946d9a7b@ec2-184-73-167-43.compute-1.amazonaws.com:5432/d59m72tguufnuc';
+connectionString = 'postgres://iitxlielolcqnu:f4acb49cfb5293787b0ca3f79e4f5622114ec8ccdc0d9a2927af6c60946d9a7b@ec2-184-73-167-43.compute-1.amazonaws.com:5432/d59m72tguufnuc';
 
-function getChoices(id, callback) {
-  //  var result = {
-  //    status:"success",
-  //    choices: [{id:1, name:"The Holy Bible"},
-  //              {id:2, name:"The Book of Mormon"},
-  //              {id:3, name:"The Pearl of Great Price"},
-  //              {id:4, name:"The Doctrine and Covenants"}]
-  //  };
-  var resultRows = [{'name' : 'test'}];
-  
-  console.log("Entering PGconnect with id: " + id);
-  pg.connect(pgConn, function(err, client, done) {
+function getChoices(description, callback) {
+  pg.connect(connectionString, function(err, client) {
     if(err) 
       return callback(err, null);
-    client.query('SELECT * FROM choice WHERE id = ' + id, function(err, result) {
-      done();
+        var sql = 'SELECT * FROM choice WHERE choice_group = $1::int';
+//    var sql = "SELECT c1.trigger_group_id FROM consequence c1 JOIN choice c2 ON (c1.id = c2.consequence_id) WHERE c1.id = (SELECT consequence_id FROM choice WHERE description = $1::int) LIMIT 1";
+//    var params = [description];
+    var params = [5];
+
+    client.query(sql, params,function(err, result){
       if(err) 
-        return callback(err, null);
-      resultRows = result.rows;
-      console.log("Row 0: " + resultRows[0]);
-      return callback(null, resultRows);
+        callback(err, null);
+      if (result == null)
+        callback("Empty query", null);
+      callback(null, result.rows);
     });
   });
 }

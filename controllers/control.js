@@ -1,10 +1,11 @@
 var db = require('../models/database.js');
 
 function handleChoice(request, response) {
-  var id = request.params.choice_id;
-  console.log("Entering handleChoice with id: " + request.params[0]);
-  db.getChoices(id, function(error, result) {
-    response.json(result);
+  var description = request.query.description;
+  db.getChoices(description, function(error, result) {
+    if(error != null){
+      response.json(result);
+    }
   });
 }
 
