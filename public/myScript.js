@@ -1,9 +1,10 @@
 $(document).ready(function(){
   $("#begin").click(function(){
-    var id = encodeURIComponent(1);
+    var id = encodeURIComponent(2);
     var params = {choice_id: id};
     var myURL = "/lake";
-    //     console.log(myURL);
+//    console.log(myURL);
+//    console.log(id);
     $.get(myURL, params, display);
   });
 });

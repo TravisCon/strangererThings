@@ -32,7 +32,7 @@ INSERT INTO setting(name, photo_url, notes)
 VALUES
 ('lake', 'lake1.jpg', 'Beginning spot'),
 ('dock', 'dock1.jpg', 'When the user chooses to swim'),
-('underwater', 'underwater_cave.jpg', "User opens chest with scuba gear"),
+('underwater', 'underwater_cave.jpg', 'User opens chest with scuba gear'),
 ('dead', 'you_died.jpg', 'Just in case the user dies');
 
 INSERT INTO choice_group(setting_id, name)
@@ -43,13 +43,22 @@ VALUES
 ((SELECT id FROM setting WHERE name = 'underwater'), 'underwater1'),
 ((SELECT id FROM setting WHERE name = 'dead'), 'dead');
 
+INSERT INTO consequence(trigger_group_id, description)
+VALUES
+((SELECT id FROM choice_group WHERE name = 'dead'),
+'You have died! Sorry'),
+((SELECT id FROM choice_group WHERE name = 'dead'),
+'You have still died! Sorry'),
+((SELECT id FROM choice_group WHERE name = 'dead'),
+'Once again, you died');
 
 INSERT INTO choice(group_id, consequence_id, description)
 VALUES
-((SELECT id FROM choice_group WHERE name='begin'), 1, "Pickup 1 Stick"),
-((SELECT id FROM choice_group WHERE name='begin'), 2, "Pickup 2 sticks"),
-((SELECT id FROM choice_group WHERE name='begin'), 3, "Pickup 3 Sticks");
+((SELECT id FROM choice_group WHERE name='begin'), 1, 'Swim to shore'),
+((SELECT id FROM choice_group WHERE name='begin'), 2, 'Swim to treasure chest'),
+((SELECT id FROM choice_group WHERE name='begin'), 3, 'Swim to pirate ship');
 
 #DROP SCHEMA public CASCADE;
 #CREATE SCHEMA public;
 #cat .\recipes.sql | heroku pg:psql
+#select * from consequence c1 join choice c2 on (c1.id = c2.consequence_id) WHERE c2.group_id = 1;
