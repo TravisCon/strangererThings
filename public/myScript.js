@@ -15,13 +15,13 @@ function display(data, status){
   } else {
     console.log("Data: " + data + ". Status: " + status);
     var output = "";
-    console.log(data[0].description);
+    //    console.log(data[0].description);
     for (i in data){
       newButtons += data[i].description + "<br>"; 
     }
-    
-    console.log(consequence);
+
+    console.log(newButtons);
     $("#choices").html(newButtons);
-    $("#results").html();
+    //$("#results").html();
   }
 }

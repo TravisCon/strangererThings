@@ -7,10 +7,10 @@ function getChoices(description, callback) {
   pg.connect(connectionString, function(err, client) {
     if(err) 
       return callback(err, null);
-        var sql = 'SELECT * FROM choice WHERE choice_group = $1::int';
+        var sql = 'SELECT * FROM choice WHERE group_id = $1::int';
 //    var sql = "SELECT c1.trigger_group_id FROM consequence c1 JOIN choice c2 ON (c1.id = c2.consequence_id) WHERE c1.id = (SELECT consequence_id FROM choice WHERE description = $1::int) LIMIT 1";
 //    var params = [description];
-    var params = [5];
+    var params = [2];
 
     client.query(sql, params,function(err, result){
       if(err) 
