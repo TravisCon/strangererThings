@@ -1,5 +1,7 @@
 body {
-  background-image: url("photos/lake1.jpg");
+  background-image: url(photos/lake1.jpg);
+  transition: background 0.3s ease;
+  background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;
   background-size: cover !important;
@@ -8,6 +10,6 @@ body {
 
 .center{
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius: 10px;
 }

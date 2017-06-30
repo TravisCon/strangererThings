@@ -15,7 +15,7 @@ CREATE TABLE choice_group
 
 CREATE TABLE consequence
 (
-  id                SERIAL PRIMARY KEY,
+  id          SERIAL PRIMARY KEY,
   trigger_group_id  INT NOT NULL REFERENCES choice_group(id),
   description       TEXT
 );
@@ -50,22 +50,27 @@ VALUES
 ((SELECT id FROM choice_group WHERE name = 'dead'),
  'You have still died! Sorry'),
 ((SELECT id FROM choice_group WHERE name = 'dead'),
- 'Once again, you died');
+ 'Once again, you died'),
+ ((SELECT id FROM choice_group WHERE name = 'begin'),
+  'You wake up on a raft in the middle of nowhere');
 
 INSERT INTO choice(group_id, consequence_id, description)
 VALUES
+((1), )
 ((SELECT id FROM choice_group WHERE name='begin'), 1, 'Swim to shore'),
 ((SELECT id FROM choice_group WHERE name='begin'), 2, 'Swim to treasure chest'),
-((SELECT id FROM choice_group WHERE name='begin'), 3, 'Swim to pirate ship');
+((SELECT id FROM choice_group WHERE name='begin'), 3, 'Swim to pirate ship'),
+((SELECT id FROM choice_group WHERE name='dead'), 4, 'Restart');
 
-SELECT c1.description, c2.description, c2.consequence_id FROM consequence c1 
+SELECT s.photo_url, c1.description as group_description, c2.description as consequence_description, c2.consequence_id, c2.id as choice_id
+  FROM consequence c1 
   JOIN choice_group cg  ON cg.id = c1.trigger_group_id
   JOIN choice c2        ON cg.id = c2.group_id
-  #JOIN setting s        ON s.id = cg.setting_id
-  #WHERE c1.id = (SELECT consequence_id FROM choice WHERE #description = 'Swim to treasure chest');
-  #s.photo_url,
+  JOIN setting s        ON s.id = cg.setting_id
+  WHERE c1.id = something
+
+#(SELECT consequence_id FROM choice WHERE description = 'Swim to treasure chest');
 
 #DROP SCHEMA public CASCADE;
 #CREATE SCHEMA public;
 #cat .\recipes.sql | heroku pg:psql
-#select * from consequence c1 join choice c2 on (c1.id = c2.consequence_id) WHERE c2.group_id = 1;

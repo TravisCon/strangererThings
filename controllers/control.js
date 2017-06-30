@@ -1,9 +1,9 @@
 var db = require('../models/database.js');
 
 function handleChoice(request, response) {
-  var description = request.query.description;
-  db.getChoices(description, function(error, result) {
-    if(error != null){
+  var id = request.query.id;
+  db.getChoices(id, function(error, result) {
+    if(error == null){
       response.json(result);
     }
   });
