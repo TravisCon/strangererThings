@@ -20,9 +20,6 @@ function display(data, status){
       newButtons += createButton(data[i]);
     }
 
-    //    console.log(data[0].consequence_description);
-    //    console.log(newButtons);
-
     changeBackground(data[0].photo_url)
     $("#consequences").html(data[0].consequence_description);
     $("#choices").html(newButtons);
@@ -35,11 +32,16 @@ function createButton (row) {
   var close = "</button>";
   return open + row.consequence_id + middle + row.choice_description + close;
 }
+
 function changeBackground(newPhoto) {
   var oldPhoto = $("body").css('background-image');
   oldPhoto = oldPhoto.replace('url(\"','').replace('\")','');
   oldPhoto = oldPhoto.split('/').pop();
   console.log(oldPhoto);
-  if (newPhoto != oldPhoto)
-    $("body").css('background-image', ('url(photos/' + newPhoto + ')'))
+  if (newPhoto != oldPhoto){
+    //    $("#overlay").fadeIn(function(){
+    $(this).css('background-image', ('url(photos/' + newPhoto + ')'));
+    //      $("#overlay").fadeOut();
+    //    });
+  }
 }

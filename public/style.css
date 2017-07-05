@@ -1,6 +1,6 @@
 body {
   background-image: url(photos/lake1.jpg);
-  transition: background 0.3s ease;
+/*  transition: background 0.8s ease-in 0.2s;*/
   background-position: center;
   background-attachment: fixed;
   background-repeat: no-repeat;

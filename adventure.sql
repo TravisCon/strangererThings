@@ -69,8 +69,6 @@ SELECT s.photo_url, c1.description as group_description, c2.description as conse
   JOIN setting s        ON s.id = cg.setting_id
   WHERE c1.id = something
 
-#(SELECT consequence_id FROM choice WHERE description = 'Swim to treasure chest');
-
 #DROP SCHEMA public CASCADE;
 #CREATE SCHEMA public;
-#cat .\recipes.sql | heroku pg:psql
+#cat .\adventure.sql | heroku pg:psql
