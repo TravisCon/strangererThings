@@ -34,6 +34,7 @@ VALUES
 ('dock', 'dock1.jpg', 'When the user chooses to swim'),
 ('underwater', 'underwater_cave.jpg', 'User opens chest with scuba gear'),
 ('dead', 'you_died.jpg', 'Just in case the user dies');
+('pirateship','pirateship.png','a ship full of blood thirst pirates');
 
 INSERT INTO choice_group(setting_id, name)
 VALUES
@@ -41,7 +42,8 @@ VALUES
 ((SELECT id FROM setting WHERE name = 'lake'), 'chest'),
 ((SELECT id FROM setting WHERE name = 'dock'), 'dock1'),
 ((SELECT id FROM setting WHERE name = 'underwater'), 'underwater1'),
-((SELECT id FROM setting WHERE name = 'dead'), 'dead');
+((SELECT id FROM setting WHERE name = 'dead'), 'dead'),
+((SELECT id FROM setting WHERE name = 'pirateship'), 'pirateship');
 
 INSERT INTO consequence(trigger_group_id, description)
 VALUES
