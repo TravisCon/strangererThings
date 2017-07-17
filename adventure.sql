@@ -33,8 +33,8 @@ VALUES
 ('lake', 'lake1.jpg', 'Beginning spot'),
 ('dock', 'dock1.jpg', 'When the user chooses to swim'),
 ('underwater', 'underwater_cave.jpg', 'User opens chest with scuba gear'),
-('dead', 'you_died.jpg', 'Just in case the user dies');
-('pirateship','pirateship.png','a ship full of blood thirst pirates');
+('dead', 'you_died.jpg', 'Just in case the user dies'),
+('pirateship', 'pirateship.png', 'a ship full of blood thirst pirates');
 
 INSERT INTO choice_group(setting_id, name)
 VALUES
@@ -54,11 +54,10 @@ VALUES
 ((SELECT id FROM choice_group WHERE name = 'pirateship'),
  'You swim to the pirate ship, the odor of smelly sea dogs fills your nostrils. Despite your fears, you climb abord.'),
  ((SELECT id FROM choice_group WHERE name = 'begin'),
-  'You wake up on a raft in the middle of nowhere');
+  'You wake up on a raft in the middle of nowhere. Off in the distance you see a large pirateship to your left. Nearby you see a treasure chest. On your right you see a shoreline with a wooden dock.');
 
 INSERT INTO choice(group_id, consequence_id, description)
 VALUES
-((1), )
 ((SELECT id FROM choice_group WHERE name='begin'), 1, 'Swim to shore'),
 ((SELECT id FROM choice_group WHERE name='begin'), 2, 'Swim to treasure chest'),
 ((SELECT id FROM choice_group WHERE name='begin'), 3, 'Swim to pirate ship'),
