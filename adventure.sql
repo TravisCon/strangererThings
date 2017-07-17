@@ -47,12 +47,12 @@ VALUES
 
 INSERT INTO consequence(trigger_group_id, description)
 VALUES
-((SELECT id FROM choice_group WHERE name = 'dead'),
- 'You have died! Sorry'),
-((SELECT id FROM choice_group WHERE name = 'dead'),
- 'You have still died! Sorry'),
-((SELECT id FROM choice_group WHERE name = 'dead'),
- 'Once again, you died'),
+((SELECT id FROM choice_group WHERE name = 'dock1'),
+ 'You start swimming to the shore. As you swim, chills fill your spine. You see two figures on the shore stairing at you. It''s too late to turn back now.'),
+((SELECT id FROM choice_group WHERE name = 'chest'),
+ 'You open the treasure chest. Inside you find some scuba gear.'),
+((SELECT id FROM choice_group WHERE name = 'pirateship'),
+ 'You swim to the pirate ship, the odor of smelly sea dogs fills your nostrils. Despite your fears, you climb abord.'),
  ((SELECT id FROM choice_group WHERE name = 'begin'),
   'You wake up on a raft in the middle of nowhere');
 
@@ -63,13 +63,6 @@ VALUES
 ((SELECT id FROM choice_group WHERE name='begin'), 2, 'Swim to treasure chest'),
 ((SELECT id FROM choice_group WHERE name='begin'), 3, 'Swim to pirate ship'),
 ((SELECT id FROM choice_group WHERE name='dead'), 4, 'Restart');
-
-SELECT s.photo_url, c1.description as group_description, c2.description as consequence_description, c2.consequence_id, c2.id as choice_id
-  FROM consequence c1 
-  JOIN choice_group cg  ON cg.id = c1.trigger_group_id
-  JOIN choice c2        ON cg.id = c2.group_id
-  JOIN setting s        ON s.id = cg.setting_id
-  WHERE c1.id = something
 
 #DROP SCHEMA public CASCADE;
 #CREATE SCHEMA public;
