@@ -39,9 +39,6 @@ function changeBackground(newPhoto) {
   oldPhoto = oldPhoto.split('/').pop();
   console.log(oldPhoto);
   if (newPhoto != oldPhoto){
-    //    $("#overlay").fadeIn(function(){
-    $(this).css('background-image', ('url(photos/' + newPhoto + ')'));
-    //      $("#overlay").fadeOut();
-    //    });
+    $("body").css('background-image', ('url(photos/' + newPhoto + ')'));
   }
 }
