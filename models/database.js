@@ -1,7 +1,7 @@
 var pg = require('pg');
 pg.defaults.ssl = true;
 
-connectionString = 'postgres://iitxlielolcqnu:f4acb49cfb5293787b0ca3f79e4f5622114ec8ccdc0d9a2927af6c60946d9a7b@ec2-184-73-167-43.compute-1.amazonaws.com:5432/d59m72tguufnuc';
+connectionString = 'Nope';
 
 function getChoices(id, callback) {
   pg.connect(connectionString, function(err, client) {
